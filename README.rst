@@ -29,8 +29,8 @@ Install with pip
 
     $ pip install django-multiselectfield
 
-Configure your models.py
-------------------------
+Configure your ``models.py``
+----------------------------
 
 .. code-block:: python
 
@@ -60,8 +60,46 @@ Configure your models.py
                                      max_length=3)
 
 
-In your settings.py
--------------------
+Configure your ``admin.py``
+---------------------------
+
+For ``list_diplay`` you can simply specify the list of fields, but you must use the ``msf_filter`` helper function for fields in ``list_filter``:
+
+.. code-block:: python
+
+    from django.contrib import admin
+
+    from multiselectfield.admin import msf_filter
+
+    from .models import MyModel
+
+    class MyModelAdmin(admin.ModelAdmin):
+        list_display = ('my_field', 'my_field2')
+        list_filter = (msf_filter('my_field2'),)
+
+    admin.site.register(MyModel, MyModelAdmin)
+
+Alternatively, you can use the more explicit specification for ``list_filter``:
+
+.. code-block:: python
+
+    from django.contrib import admin
+
+    from multiselectfield.admin import MSFChoiceListFilter
+
+    from .models import MyModel
+
+
+    class MyModelAdmin(admin.ModelAdmin):
+        list_display = ('my_field', 'my_field2')
+        list_filter = (
+            ('my_field2', MSFChoiceListFilter),
+        )
+
+    admin.site.register(MyModel, MyModelAdmin)
+
+In your ``settings.py``
+-----------------------
 
 Only you need it, if you want the translation of django-multiselectfield
 
