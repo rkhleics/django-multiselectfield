@@ -16,11 +16,17 @@
 
 from django.contrib import admin
 
+from multiselectfield.admin import MSFChoicesFieldListFilter
+
 from .models import Book
 
 
 class BookAdmin(admin.ModelAdmin):
     list_display = ('title', 'categories', 'tags', 'published_in')
+    list_filter = (
+        ('tags', MSFChoicesFieldListFilter),
+        ('categories', MSFChoicesFieldListFilter),
+    )
 
 
 admin.site.register(Book, BookAdmin)
