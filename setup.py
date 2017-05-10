@@ -26,7 +26,7 @@ def read(*rnames):
 
 setup(
     name="django-multiselectfield",
-    version="0.1.5",
+    version="0.1.6.dev2",
     author="Pablo Martin",
     author_email="goinnn@gmail.com",
     description="Django multiple select field",

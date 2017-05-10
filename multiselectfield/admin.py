@@ -15,8 +15,10 @@ def msf_filter(field_name, parameter_name=None):
     Helper function to allow users to simply specify a list of fields in
     `list_filter`
     """
+    p_name = field_name if parameter_name is None else parameter_name
+
     class MSFFieldChoicesFieldListFilter(MSFChoicesFieldListFilter):
         title = _(field_name)
-        parameter_name = field_name if parameter_name is None else parameter_name
+        parameter_name = p_name
 
     return MSFFieldChoicesFieldListFilter
